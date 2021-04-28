@@ -1,40 +1,42 @@
 <?php
-if (isset($_GET['usuario']) && $_GET['usuario'] != ''){
-   $usuario = [];
-      $usuario['usuario'] = $_GET['usuario'];
 
-      if(isset($_GET['senha'])){
-        $usuario['senha'] = $_GET['senha'];
-    }else{
-        $usuario['senha'] = '';
+if (isset($_GET['usuario']) && $_GET['usuario'] != '') {
+    $novousuario = [];
+    $novousuario['usuario'] = $_GET['usuario'];
 
-   if(isset($_GET['administrador'])){
-       $usuario['administrador'] = $_GET['admistrador'];
-   }else{
-       $usuario['administrador'] = '';
+    if (isset($_GET['senha'])) {
+        $novousuario['senha'] = $_GET['senha'];
+    } else {
+        $novousuario['senha'] = '';
 
-   }
+        
+    }
+    if (isset($_GET['administrador'])) {
+        $novousuario['administrador'] = $_GET['administrador'];
+    } else {
+        $novousuario['administrador'] = '';
+    }
 
-   }
+    
+    include "conexao.php";
 
-include "conexao.php";
-
-if(isset($usuario)){
-    $sqlInserir = "INSERT INTO tb_usuarios(
+    if (isset($novousuario)) {
+   
+        $sqlInserir = "INSERT INTO tb_usuarios(
         usuario,
         senha,
         administrador
         
-    )VALUES(
-        '{$usuario['usuario']}',
-        '{$usuario['senha']}',
-        '{$usuario['administrador']}'
+    ) VALUES(
+        '{$novousuario['usuario']}',
+        '{$novousuario['senha']}',
+        '{$novousuario['administrador']}'
       
     );";
 
-          mysqli_query($conexao, $sqlInserir);
-  
+
+        mysqli_query($conexao, $sqlInserir);
     }
 }
-include "template.php";
-?>
+     include "template.php";
+     ?>

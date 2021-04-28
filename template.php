@@ -15,22 +15,21 @@
         <h1>CADASTRO DE USUÁRIO</h1>
 
         <form action="">
-        <fieldset>
+        
             <label for="usuario">Usuário</label>
-            <input type="text" name="usuario" id="usuario" maxlenght="20" required>
+            <input type="text" name="usuario" id="usuario" maxlength="20" required>
             <label for="senha">Senha</label>
-            <input type="password" name="senha" id="senha" maxlenght="8" required>
+            <input type="password" name="senha" id="senha" maxlength="8" required>
             <br><br>
-            <fieldset>
-          
-            <label for="admistrador">Usuário Admistrador:</label>
-                    <input type="checkbox" name="usuario" value="sim" id = "Admistrador" maxlenght="3">
+            <fieldset>     
+            <input type="hidden" name="administrador" value="Não" class="form-check-input" id="admistrador">
+            <input class="mt-3" type="checkbox" name="administrador" value="Sim" class="form-check-input" id="admistrador">
+            <label class="mt-3 form-check-label" for="adm">Administrador</label>
+            <div class="d-flex justify-content-center align-items-center">
+              <button type="submit" id="btn" class="mt-3 d-block btn btn-primary">Salvar</button>
                     
-                    </fieldset>
+        </fieldset>
 
-
-            <button type="submit">salvar</button>
-            </fieldset>
         </form>
     <br>
     <table class="table">
@@ -44,16 +43,19 @@
             </thead>
             <tbody>
             <?php
+                     
                 $sqlBusca = "SELECT * FROM tb_usuarios";
                 $resultado = mysqli_query($conexao , $sqlBusca);
 
                 $gerenciadorUsuario = [];
 
                 while($usuario = mysqli_fetch_assoc ($resultado)){
+                   
                     $gerenciadorUsuario[] = $usuario;
                 }
             foreach($gerenciadorUsuario as $usuario): ?>
                     <tr>
+                    
                         <td><?php echo $usuario['usuario']; ?></td>
                         <td><?php echo $usuario['senha']; ?></td>
                         <td><?php echo $usuario['administrador']; ?></td>                       
@@ -63,7 +65,7 @@
             </tbody>
         </table>
     </div>
-
+   
 
     <script src="bootstrp-5/bootstrap.bundle.min.js"></script>
 
